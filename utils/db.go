@@ -1,8 +1,7 @@
 package utils
 
 import (
-	"log"
-
+	"fmt"
 	"github.com/burhangltekin/byfood/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -10,11 +9,15 @@ import (
 
 var DB *gorm.DB
 
-func InitDB() {
+func InitDB() error {
 	var err error
 	DB, err = gorm.Open(sqlite.Open("books.db"), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Failed to connect to DB:", err)
+		return fmt.Errorf("failed to connect to DB: %w", err)
 	}
-	DB.AutoMigrate(&models.Book{})
+	err = DB.AutoMigrate(&models.Book{})
+	if err != nil {
+		return fmt.Errorf("failed to migrate DB schema: %w", err)
+	}
+	return nil
 }

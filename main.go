@@ -11,15 +11,13 @@ import (
 )
 
 func main() {
-
 	config, err := loadConfig("config.yaml")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to load config: %v", err)
 	}
 
-	err = setupApp(config)
-	if err != nil {
-		log.Fatal(err)
+	if err := setupApp(config); err != nil {
+		log.Fatalf("Failed to set up app: %v", err)
 	}
 
 	r := gin.Default()
@@ -27,15 +25,17 @@ func main() {
 
 	routes.SetupRoutes(r)
 
-	err = r.Run(":8080")
-	if err != nil {
-		return
+	log.Println("Starting server on :8080")
+	if err := r.Run(":8080"); err != nil {
+		log.Fatalf("Server failed to start: %v", err)
 	}
 }
 
 func setupApp(config models.AppConfig) error {
 	if config.AutoMigrate {
-		utils.InitDB()
+		if err := utils.InitDB(); err != nil {
+			log.Fatalf("Database initialization failed: %v", err)
+		}
 	}
 	return nil
 }
@@ -46,8 +46,14 @@ func loadConfig(path string) (models.AppConfig, error) {
 	if err != nil {
 		return config, err
 	}
-	defer f.Close()
+	defer func() {
+		if cerr := f.Close(); cerr != nil {
+			log.Printf("Warning: failed to close config file: %v", cerr)
+		}
+	}()
 	decoder := yaml.NewDecoder(f)
-	err = decoder.Decode(&config)
-	return config, err
+	if err := decoder.Decode(&config); err != nil {
+		return config, err
+	}
+	return config, nil
 }
