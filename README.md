@@ -90,6 +90,37 @@ golangci-lint run ./...
 
 You can also add this to your CI pipeline to enforce code quality.
 
+## Project Structure
+
+- `main.go` – Application entry point, server setup, and middleware.
+- `config.yaml` – Configuration file for the app.
+- `books.db` – SQLite database file (auto-created).
+- `controllers/` – Handlers for API endpoints (e.g., book_controller.go).
+- `models/` – Data models (e.g., book.go).
+- `routes/` – Route definitions and grouping (e.g., router.go).
+- `swagger/` – Swagger/OpenAPI documentation files.
+- `utils/` – Utility functions (e.g., database connection).
+
+## API Endpoints
+
+All endpoints are prefixed with `/api`.
+
+| Method | Endpoint         | Description           |
+|--------|------------------|----------------------|
+| GET    | /api/books       | List all books       |
+| GET    | /api/books/:id   | Get a book by ID     |
+| POST   | /api/books       | Create a new book    |
+| PUT    | /api/books/:id   | Update a book by ID  |
+| DELETE | /api/books/:id   | Delete a book by ID  |
+
+### Example Usage
+
+- List books: `curl http://localhost:8080/api/books`
+- Get book: `curl http://localhost:8080/api/books/1`
+- Create book: `curl -X POST -H "Content-Type: application/json" -d '{"title":"Book Title","author":"Author"}' http://localhost:8080/api/books`
+- Update book: `curl -X PUT -H "Content-Type: application/json" -d '{"title":"New Title","author":"New Author"}' http://localhost:8080/api/books/1`
+- Delete book: `curl -X DELETE http://localhost:8080/api/books/1`
+
 ## GitHub Repository
 [https://github.com/burhangltekin/byfood](https://github.com/burhangltekin/byfood)
 
