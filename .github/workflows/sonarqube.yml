@@ -24,9 +24,9 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=byfood
+            -Dsonar.organization=burhangltekin
             -Dsonar.sources=.
             -Dsonar.go.coverage.reportPaths=coverage.out
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-
