@@ -1,0 +1,7 @@
+logLevel: info
+enableReqLogging: true
+autoMigrate: true
+corsOrigins:
+  - "*"
+apiVersion: v1
+shutdownTimeout: 10

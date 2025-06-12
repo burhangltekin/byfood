@@ -14,10 +14,10 @@ type BookInput struct {
 }
 
 type AppConfig struct {
-	LogLevel         string
-	EnableReqLogging bool
-	AutoMigrate      bool
-	CORSOrigins      []string
-	APIVersion       string
-	ShutdownTimeout  int
+	LogLevel         string   `yaml:"logLevel"`
+	EnableReqLogging bool     `yaml:"enableReqLogging"`
+	AutoMigrate      bool     `yaml:"autoMigrate"`
+	CORSOrigins      []string `yaml:"corsOrigins"`
+	APIVersion       string   `yaml:"apiVersion"`
+	ShutdownTimeout  int      `yaml:"shutdownTimeout"`
 }
