@@ -1,0 +1,22 @@
+# Go build artifacts
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# GoLand/IDEA project files
+.idea/
+*.iml
+
+# Editor swap/backup files
+*.swp
+*.swo
+
+# macOS system files
+.DS_Store
