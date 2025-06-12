@@ -25,10 +25,15 @@ func GetBook(c *gin.Context) {
 }
 
 func CreateBook(c *gin.Context) {
-	var book models.Book
-	if err := c.ShouldBindJSON(&book); err != nil || book.Title == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
+	var input models.BookInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
+	}
+	book := models.Book{
+		Title:  input.Title,
+		Author: input.Author,
+		Year:   input.Year,
 	}
 	utils.DB.Create(&book)
 	c.JSON(http.StatusCreated, book)
@@ -41,9 +46,9 @@ func UpdateBook(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
 		return
 	}
-	var input models.Book
-	if err := c.ShouldBindJSON(&input); err != nil || input.Title == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
+	var input models.BookInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	book.Title = input.Title
