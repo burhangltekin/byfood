@@ -23,7 +23,7 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v2
         with:
           args: >
-            -Dsonar.projectKey=byfood
+            -Dsonar.projectKey=burhangltekin_byfood
             -Dsonar.organization=burhangltekin
             -Dsonar.sources=.
             -Dsonar.go.coverage.reportPaths=coverage.out
