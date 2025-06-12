@@ -387,7 +387,10 @@ func TestDeleteBook(t *testing.T) {
 			name: "delete existing book",
 			prepare: func() (*gin.Context, *httptest.ResponseRecorder) {
 				db, _ := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
-				db.AutoMigrate(&models.Book{})
+				err := db.AutoMigrate(&models.Book{})
+				if err != nil {
+					return nil, nil
+				}
 				utils.DB = db
 				db.Create(&testBook)
 				w := httptest.NewRecorder()
@@ -403,7 +406,10 @@ func TestDeleteBook(t *testing.T) {
 			name: "delete non-existing book",
 			prepare: func() (*gin.Context, *httptest.ResponseRecorder) {
 				db, _ := gorm.Open(sqlite.Open(":memory:"), &gorm.Config{})
-				db.AutoMigrate(&models.Book{})
+				err := db.AutoMigrate(&models.Book{})
+				if err != nil {
+					return nil, nil
+				}
 				utils.DB = db
 				w := httptest.NewRecorder()
 				c, _ := gin.CreateTestContext(w)

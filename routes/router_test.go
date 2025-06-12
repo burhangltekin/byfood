@@ -1,13 +1,13 @@
 package routes
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 
@@ -98,7 +98,9 @@ func TestSetupRoutes(t *testing.T) {
 			url:        "/api/books/1",
 			expectCode: 200,
 			checkBody: func(t *testing.T, body string) {
-				// Accept empty or message
+				if len(strings.TrimSpace(body)) > 0 {
+					assert.Contains(t, body, "message")
+				}
 			},
 		},
 	}

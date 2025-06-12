@@ -2,9 +2,11 @@ package utils
 
 import (
 	"fmt"
-	"github.com/burhangltekin/byfood/models"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+
+	"github.com/burhangltekin/byfood/models"
 )
 
 var DB *gorm.DB

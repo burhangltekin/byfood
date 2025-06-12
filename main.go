@@ -1,15 +1,17 @@
 package main
 
 import (
-	"github.com/burhangltekin/byfood/models"
-	"github.com/burhangltekin/byfood/routes"
-	"github.com/burhangltekin/byfood/utils"
+	"log"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gopkg.in/yaml.v3"
-	"log"
-	"os"
+
+	"github.com/burhangltekin/byfood/models"
+	"github.com/burhangltekin/byfood/routes"
+	"github.com/burhangltekin/byfood/utils"
 )
 
 // @title           ByFood API
