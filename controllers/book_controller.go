@@ -9,6 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetBooks godoc
+// @Summary      List all books
+// @Description  Get all books from the database
+// @Tags         books
+// @Produce      json
+// @Success      200  {array}  models.Book
+// @Failure      500  {object}  map[string]string
+// @Router       /books [get]
 func GetBooks(c *gin.Context) {
 	var books []models.Book
 	if err := utils.DB.Find(&books).Error; err != nil {
@@ -19,6 +27,16 @@ func GetBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, books)
 }
 
+// GetBook godoc
+// @Summary      Get a book by ID
+// @Description  Get details of a book by its ID
+// @Tags         books
+// @Produce      json
+// @Param        id   path      int  true  "Book ID"
+// @Success      200  {object}  models.Book
+// @Failure      404  {object}  map[string]string
+// @Failure      500  {object}  map[string]string
+// @Router       /books/{id} [get]
 func GetBook(c *gin.Context) {
 	id := c.Param("id")
 	var book models.Book
@@ -30,6 +48,17 @@ func GetBook(c *gin.Context) {
 	c.JSON(http.StatusOK, book)
 }
 
+// CreateBook godoc
+// @Summary      Create a new book
+// @Description  Add a new book to the database
+// @Tags         books
+// @Accept       json
+// @Produce      json
+// @Param        book  body      models.BookInput  true  "Book to create"
+// @Success      201   {object}  models.Book
+// @Failure      400   {object}  map[string]string
+// @Failure      500   {object}  map[string]string
+// @Router       /books [post]
 func CreateBook(c *gin.Context) {
 	var input models.BookInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -50,6 +79,19 @@ func CreateBook(c *gin.Context) {
 	c.JSON(http.StatusCreated, book)
 }
 
+// UpdateBook godoc
+// @Summary      Update a book
+// @Description  Update an existing book by ID
+// @Tags         books
+// @Accept       json
+// @Produce      json
+// @Param        id    path      int                true  "Book ID"
+// @Param        book  body      models.BookInput   true  "Book data"
+// @Success      200   {object}  models.Book
+// @Failure      400   {object}  map[string]string
+// @Failure      404   {object}  map[string]string
+// @Failure      500   {object}  map[string]string
+// @Router       /books/{id} [put]
 func UpdateBook(c *gin.Context) {
 	id := c.Param("id")
 	var book models.Book
@@ -75,6 +117,16 @@ func UpdateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, book)
 }
 
+// DeleteBook godoc
+// @Summary      Delete a book
+// @Description  Delete a book by ID
+// @Tags         books
+// @Produce      json
+// @Param        id   path      int  true  "Book ID"
+// @Success      200  {object}  map[string]string
+// @Failure      404  {object}  map[string]string
+// @Failure      500  {object}  map[string]string
+// @Router       /books/{id} [delete]
 func DeleteBook(c *gin.Context) {
 	id := c.Param("id")
 	result := utils.DB.Delete(&models.Book{}, id)
