@@ -77,6 +77,19 @@ Or, you can use [Swagger UI](https://swagger.io/tools/swagger-ui/) locally:
 - Coverage is uploaded to SonarCloud (see `.github/workflows/sonarqube.yml`).
 - Configure your `SONAR_TOKEN` and `SONAR_HOST_URL` (and `SONAR_ORGANIZATION` if using SonarCloud) as GitHub repository secrets.
 
+## Linting
+
+This project uses [golangci-lint](https://golangci-lint.run/) for linting.
+
+To install and run the linter:
+
+```sh
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+golangci-lint run ./...
+```
+
+You can also add this to your CI pipeline to enforce code quality.
+
 ## GitHub Repository
 [https://github.com/burhangltekin/byfood](https://github.com/burhangltekin/byfood)
 
