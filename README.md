@@ -117,8 +117,8 @@ All endpoints are prefixed with `/api`.
 
 - List books: `curl http://localhost:8080/api/books`
 - Get book: `curl http://localhost:8080/api/books/1`
-- Create book: `curl -X POST -H "Content-Type: application/json" -d '{"title":"Book Title","author":"Author"}' http://localhost:8080/api/books`
-- Update book: `curl -X PUT -H "Content-Type: application/json" -d '{"title":"New Title","author":"New Author"}' http://localhost:8080/api/books/1`
+- Create book: `curl -X POST -H "Content-Type: application/json" -d '{"title":"Book Title","author":"Author", "year": 2024}' http://localhost:8080/api/books`
+- Update book: `curl -X PUT -H "Content-Type: application/json" -d '{"title":"Newer Title","author":"New Author", "year": 2024}' http://localhost:8080/api/books/1`
 - Delete book: `curl -X DELETE http://localhost:8080/api/books/1`
 
 ## GitHub Repository
@@ -127,3 +127,12 @@ All endpoints are prefixed with `/api`.
 ---
 
 **Happy coding!**
+
+Screenshots of the API in action:
+
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
